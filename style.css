@@ -1,0 +1,60 @@
+header,
+.points {
+  color: white;
+}
+
+.img,
+img {
+  height: 100px;
+  width: 100px;
+}
+
+body {
+  margin: 0;
+  background-color: #2f4858;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.game-grid {
+  max-width: 545.5px;
+  max-height: 250px;
+  border-radius: 12px;
+  background-color: #9ee493;
+  margin: auto;
+  text-align: center;
+}
+
+.img-1,
+.img-2,
+.img-3,
+.img-4,
+.img-5,
+.img2-1,
+.img2-2,
+.img2-3,
+.img2-4,
+.img2-5,
+.matched {
+  display: inline-block;
+  border-style: solid;
+  border-radius: 12px;
+}
+
+.img-1,
+.img-2,
+.img-3,
+.img-4,
+.img-5,
+.img2-1,
+.img2-2,
+.img2-3,
+.img2-4,
+.img2-5 :hover {
+  cursor: pointer;
+}
+
+.message {
+  font-size: 24px;
+  font-weight: 600;
+}
