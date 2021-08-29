@@ -7,6 +7,7 @@ header,
 img {
   height: 100px;
   width: 100px;
+  display: inline-block;
 }
 
 body {
@@ -25,32 +26,32 @@ body {
   text-align: center;
 }
 
+.img-0,
 .img-1,
 .img-2,
 .img-3,
 .img-4,
 .img-5,
-.img2-1,
-.img2-2,
-.img2-3,
-.img2-4,
-.img2-5,
+.img-6,
+.img-7,
+.img-8,
+.img-9,
 .matched {
   display: inline-block;
   border-style: solid;
   border-radius: 12px;
 }
 
+.img-0,
 .img-1,
 .img-2,
 .img-3,
 .img-4,
 .img-5,
-.img2-1,
-.img2-2,
-.img2-3,
-.img2-4,
-.img2-5 :hover {
+.img-6,
+.img-7,
+.img-8,
+.img-9 :hover {
   cursor: pointer;
 }
 

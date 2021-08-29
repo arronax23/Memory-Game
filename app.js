@@ -7,6 +7,7 @@ let currentPokemon = "";
 let currentId;
 
 let pokemonsNames = ["pok1", "pok2", "pok3", "pok4", "pok5","pok1","pok2","pok3","pok4","pok5"];
+let activeListeners = [0,1,2,3,4,5,6,7,8,9];
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -44,7 +45,8 @@ let listener = function(e){
         state = "pickedOne"
     }
     else if (state == "pickedOne") {
-        if (currentPokemon == pickedPokemon && currentId != pickedId){
+        removeListeners();
+        if (currentPokemon == pickedPokemon && currentId != pickedId){      
             console.log("win!");
             message.innerHTML = "WIN! <i class=\"far fa-smile\"></i>"
             points++;
@@ -52,6 +54,7 @@ let listener = function(e){
             // removing listener
             removeListenerAndHover(e, currentId);
             setTimeout(function(){
+                addListeners();               
                 e.target.attributes.src.value = `./img/matched.png`;
                 document.getElementById(currentId.toString()).attributes.src.value = `./img/matched.png`;
                 if (points == 5){
@@ -62,8 +65,8 @@ let listener = function(e){
         else{
             console.log("missed!");
             message.innerHTML = "MISSED! <i class=\"far fa-frown\"></i>" 
-
             setTimeout(function(){
+                addListeners();  
                 e.target.attributes.src.value = "./img/pick.png";
                 document.getElementById(currentId.toString()).attributes.src.value = `./img/pick.png`;
             }, 1000);
@@ -82,15 +85,38 @@ for (image of images) {
 }
 
 function removeListenerAndHover(e, currentId){
-    document.getElementById(currentId.toString()).removeEventListener('click', listener);
-    document.getElementById(currentId.toString()).parentNode.removeEventListener('click', listener);
-    e.target.removeEventListener('click', listener);
-    e.target.parentNode.removeEventListener('click', listener);
+    // document.getElementById(currentId.toString()).removeEventListener('click', listener);
+    // document.getElementById(currentId.toString()).parentNode.removeEventListener('click', listener);
+    // e.target.removeEventListener('click', listener);
+    // e.target.parentNode.removeEventListener('click', listener);
+    activeListeners = activeListeners.filter(number => number != currentId);
+    activeListeners = activeListeners.filter(number => number != e.target.id);
+    console.log("currentId: "+currentId)
+    console.log("e.target.id : "+e.target.id)
+    //console.log("e.target.id "+e.target.id)
     e.target.parentNode.classList.value = "img matched";
     document.getElementById(currentId.toString()).parentNode.classList.value = "img matched";
+}
+
+
+function addListeners(){
+    for (image of images) {
+        if (activeListeners.find(number => number == image.firstElementChild.id) != undefined){
+            image.addEventListener("click",listener);
+            image.classList.value = `img img-${image.firstElementChild.id}`;
+        }
+    }
+}
+
+function removeListeners(){
+    for (image of images) {
+            image.removeEventListener("click",listener);
+            image.classList.value = "img matched";
+    }
 }
 
 
 party.confetti(runButton, {
 	count: party.variation.range(10, 10),
 });
+
