@@ -89,8 +89,7 @@ function removeListenerAndHover(e, currentId){
     // document.getElementById(currentId.toString()).parentNode.removeEventListener('click', listener);
     // e.target.removeEventListener('click', listener);
     // e.target.parentNode.removeEventListener('click', listener);
-    activeListeners = activeListeners.filter(number => number != currentId);
-    activeListeners = activeListeners.filter(number => number != e.target.id);
+    activeListeners = activeListeners.filter(number => number != currentId && number != e.target.id);
     console.log("currentId: "+currentId)
     console.log("e.target.id : "+e.target.id)
     //console.log("e.target.id "+e.target.id)
