@@ -1,13 +1,3 @@
-// let state = {
-//     pickedNone: true,
-//     pickedOne: false,
-//     foundOne: false,
-//     foundTwo: false,
-//     foundThree: false,
-//     foundFour: false,
-//     foundFive: false
-// }
-
 let state = "pickedNone"
 let points = 0;
 
@@ -15,7 +5,6 @@ let imagesState = [];
 let generatedNumbers = [];
 let currentPokemon = "";
 let currentId;
-let matched = false;
 
 let pokemonsNames = ["pok1", "pok2", "pok3", "pok4", "pok5","pok1","pok2","pok3","pok4","pok5"];
 
@@ -38,6 +27,7 @@ while(imagesState.length < 10) {
 let images = document.querySelectorAll(".img");
 let message = document.querySelector(".message");
 let pointsDOM = document.querySelector(".points").firstElementChild;
+let confetti = document.querySelector(".run-confetti");
 
 let listener = function(e){
     console.log("clicked!");
@@ -60,21 +50,19 @@ let listener = function(e){
             points++;
             pointsDOM.innerHTML = `Points: ${points}`;
             // removing listener
-            document.getElementById(currentId.toString()).removeEventListener('click', listener);
-            document.getElementById(currentId.toString()).parentNode.removeEventListener('click', listener);
-            e.target.removeEventListener('click', listener);
-            e.target.parentNode.removeEventListener('click', listener);
-            e.target.parentNode.classList.value = "img matched";
-            document.getElementById(currentId.toString()).parentNode.classList.value = "img matched";
+            removeListenerAndHover(e, currentId);
             setTimeout(function(){
                 e.target.attributes.src.value = `./img/matched.png`;
                 document.getElementById(currentId.toString()).attributes.src.value = `./img/matched.png`;
+                if (points == 5){
+                    confetti.click();
+                }
             },1000);
         }
         else{
             console.log("missed!");
             message.innerHTML = "MISSED! <i class=\"far fa-frown\"></i>" 
-            matched = false;
+
             setTimeout(function(){
                 e.target.attributes.src.value = "./img/pick.png";
                 document.getElementById(currentId.toString()).attributes.src.value = `./img/pick.png`;
@@ -93,8 +81,16 @@ for (image of images) {
     image.addEventListener("click",listener);
 }
 
-/* Doesn't work
-images.addEventlistener("click", function(){
-    console.log("clicked!");
-})
-*/
+function removeListenerAndHover(e, currentId){
+    document.getElementById(currentId.toString()).removeEventListener('click', listener);
+    document.getElementById(currentId.toString()).parentNode.removeEventListener('click', listener);
+    e.target.removeEventListener('click', listener);
+    e.target.parentNode.removeEventListener('click', listener);
+    e.target.parentNode.classList.value = "img matched";
+    document.getElementById(currentId.toString()).parentNode.classList.value = "img matched";
+}
+
+
+party.confetti(runButton, {
+	count: party.variation.range(10, 10),
+});
