@@ -28,7 +28,6 @@ while(imagesState.length < 10) {
 let images = document.querySelectorAll(".img");
 let message = document.querySelector(".message");
 let pointsDOM = document.querySelector(".points").firstElementChild;
-let confetti = document.querySelector(".run-confetti");
 
 let listener = function(e){
     console.log("clicked!");
@@ -58,7 +57,7 @@ let listener = function(e){
                 e.target.attributes.src.value = `./img/matched.png`;
                 document.getElementById(currentId.toString()).attributes.src.value = `./img/matched.png`;
                 if (points == 5){
-                    confetti.click();
+                    runConfetti();
                 }
             },1000);
         }
@@ -113,9 +112,3 @@ function removeListeners(){
             image.classList.value = "img matched";
     }
 }
-
-
-party.confetti(runButton, {
-	count: party.variation.range(10, 10),
-});
-
